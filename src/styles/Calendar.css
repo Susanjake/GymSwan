@@ -1,13 +1,31 @@
 .insideCalendar{
-    width:150px;
+    
     height:50px;
     color:brown;
     border-style:solid;
-    border-width:4px;
+    border-width:0;
     border-color: aliceblue;
     overflow:hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     
+}
+
+.insideCalendar-clicked {
+    animation-duration: 3s;
+    animation-name: testSlide;
+   
+}
+
+@keyframes insideCalendar-clicked{
+    
+    from{
+        margin-left: 0%;
+        width: 50%;
+    }
+    to{
+        margin-left: 100%;
+        width:100%;
+    }
 }
