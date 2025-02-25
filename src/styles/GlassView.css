@@ -1,0 +1,40 @@
+.entry-container{
+    width:50vw;
+    height:10vh;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-exercise{
+    width: 150px;
+    height:50px;
+}
+
+.single-workout{
+    display: flex;
+}
+
+.ExerciseNameDiv{
+    display: flexbox;
+    justify-content: space-around;
+    width:70vw;
+    background-color: #313335;
+    height:auto;
+    border:2px solid white;
+    border-radius: 15px;
+    padding:5px;
+
+
+}
+
+.button-exercise{
+    display: flex;
+    justify-content: space-around;
+}
+
+.rep-weight-details{
+    display: flex;
+    justify-content: space-around;
+
+}
