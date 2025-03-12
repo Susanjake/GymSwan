@@ -1,5 +1,5 @@
 .entry-container{
-    width:50vw;
+    width:70vw;
     height:10vh;
     display:flex;
     flex-direction: row;
@@ -18,23 +18,29 @@
 .ExerciseNameDiv{
     display: flexbox;
     justify-content: space-around;
+    /* justify-content:flex-end; */
     width:70vw;
     background-color: #313335;
     height:auto;
     border:2px solid white;
     border-radius: 15px;
-    padding:5px;
-
-
+    padding: 50px;
 }
 
 .button-exercise{
     display: flex;
-    justify-content: space-around;
+    justify-content:space-between; 
 }
 
 .rep-weight-details{
     display: flex;
     justify-content: space-around;
-
 }
+
+
+.xyz{
+    display: flex;
+    gap:10px;
+    
+}
+

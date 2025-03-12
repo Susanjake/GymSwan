@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../styles/GlassView.css'
 
 
-
 function GlassView() {
     const [repInfo, setRepInfo] = useState([])
     const [exerciseName, setExerciseName] = useState('')
     const [repCount, setRepCount] = useState(0)
     const [weightCount, setWeightCount] = useState(0)
-    const [repIndex, setRepIndex] = useState(0)
+    const [Error, SetError] = useState('')
 
 
 
@@ -38,15 +37,22 @@ function GlassView() {
 
                 </div>
                 <button className='add-exercise' onClick={() => {
-                    let copy = [...repInfo];
-                    let to_push = {
-                        'exercise_name': exerciseName,
-                        'rep_details': [],
-                    };
+                    if (!exerciseName) {
+                        SetError("Enter something");
+                    }
+                    else {
+                        let copy = [...repInfo];
+                        let to_push = {
+                            'exercise_name': exerciseName,
+                            'rep_details': [],
+                            'error': '',
+                        };
 
-                    copy.push(to_push);
-                    setRepInfo(copy);
-                    document.getElementById('exercise_name_input_field').value = "";
+                        copy.push(to_push);
+                        setRepInfo(copy);
+                        document.getElementById('exercise_name_input_field').value = "";
+                        setExerciseName('');
+                    }
                 }}> Add</button>
 
             </div>
@@ -57,9 +63,11 @@ function GlassView() {
                 id='exercise_name_input_field'
                 onChange={(e) => {
                     setExerciseName(e.target.value);
+                    SetError('');
                 }}
 
             />
+            <h3>{Error}</h3>
             <div style={{ padding: '10px' }}>
                 {
                     repInfo.map((exercisename, idx) => {
@@ -67,31 +75,61 @@ function GlassView() {
                             <>
                                 <div className='ExerciseNameDiv'>
                                     <div className='button-exercise'>
+
                                         <h2>{exercisename.exercise_name}</h2>
+                                        <div className='xyz'>
+                                            <button style={{ width: '150px', height: '50px' }}
+                                                onClick={() => {
+                                                    let copy_repInfo = [...repInfo];
+                                                    copy_repInfo[idx].error = '';
 
-                                        <button style={{ width: '150px', height: '50px' }}
-                                            onClick={() => {
-                                                repAddr(idx, weightCount, repCount)
-                                                setWeightCount(0);
-                                                setRepCount(0);
-                                                document.getElementById(`rep-field-${idx}`).value = '';
-                                                document.getElementById(`weight-field-${idx}`).value = '';
-                                            }}
-                                        >Add</button>
+
+                                                    if (weightCount && repCount) {
+                                                        repAddr(idx, weightCount, repCount)
+                                                        setWeightCount(0);
+                                                        setRepCount(0);
+                                                        document.getElementById(`rep-field-${idx}`).value = '';
+                                                        document.getElementById(`weight-field-${idx}`).value = '';
+                                                    }
+                                                    else {
+                                                        //setrepError("Enter weights or reps")
+                                                        copy_repInfo[idx].error = "Enter weights or reps";
+                                                    }
+                                                    setRepInfo(copy_repInfo);
+                                                }}
+                                            >Add</button>
+
+                                            {/* < Ellipsis onClick={}/> */}
+                                            <div className="wrapper-ellipsis">
+                                                <span className="Elipsis-button">
+                                                    <b>. . .</b>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-
+                                    <h3>{repInfo[idx].error}</h3>
                                     <div>
                                         <input type='number' min="0" placeholder='Enter reps'
                                             id={`rep-field-${idx}`}
 
                                             onChange={(e) => {
+                                                let copy_repInfo = [...repInfo]
+                                                copy_repInfo[idx].error = '';
+                                                setRepInfo(copy_repInfo);
                                                 setRepCount(e.target.value);
 
-                                            }} />
+                                            }}
+                                        />
+
                                         <input type="number" min="0" placeholder='Enter weight'
                                             id={`weight-field-${idx}`}
 
                                             onChange={(e) => {
+                                                let copy_repInfo = [...repInfo]
+                                                copy_repInfo[idx].error = '';
+                                                setRepInfo(copy_repInfo);
                                                 setWeightCount(e.target.value);
                                             }}
                                         />
