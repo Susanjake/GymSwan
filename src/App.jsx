@@ -5,6 +5,7 @@ import './App.css'
 import Calendar2 from './components/Calendar2'
 import GlassView from './components/GlassView'
 import UserData from './components/UserData'
+import InputArea from './components/InputArea'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       {/* <Calendar2 /> */}
       {/* <Test /> */}
       <GlassView />
+      <InputArea />
       {/* <UserData /> */}
     </>
   )
