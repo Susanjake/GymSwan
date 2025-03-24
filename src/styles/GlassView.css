@@ -67,3 +67,12 @@
     cursor:pointer;
 }
 
+.weight_rep_inputs{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* .weight_rep_inputs .test{
+    text-align: center;
+} */

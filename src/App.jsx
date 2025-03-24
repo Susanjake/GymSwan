@@ -6,8 +6,12 @@ import Calendar2 from './components/Calendar2'
 import GlassView from './components/GlassView'
 import UserData from './components/UserData'
 import InputArea from './components/InputArea'
+import Test2 from './components/Test2'
+import { useRef } from 'react'
 
 function App() {
+
+  const internalRef = useRef()
 
   return (
     <>
@@ -15,7 +19,7 @@ function App() {
       {/* <Calendar2 /> */}
       {/* <Test /> */}
       <GlassView />
-      <InputArea />
+      {/* <Test2  ref={internalRef}/> */}
       {/* <UserData /> */}
     </>
   )
