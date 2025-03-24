@@ -6,13 +6,13 @@ import InputArea from './InputArea'
 function GlassView() {
 
     const glassRef = useRef()
-    const [repInfo, setRepInfo] = useState([])
-    const [exerciseName, setExerciseName] = useState('')
-    const [repCount, setRepCount] = useState(0)
-    const [weightCount, setWeightCount] = useState(0)
-    const [Error, SetError] = useState('')
     const repRef = useRef([])
     const weightRef = useRef([])
+
+    const [repInfo, setRepInfo] = useState([])
+    const [exerciseName, setExerciseName] = useState('')
+    const [Error, SetError] = useState('')
+   
 
     function workoutCancel(selectedIdx) {
         setRepInfo((prev) => {
@@ -49,11 +49,7 @@ function GlassView() {
         setRepInfo(copy);
     }
 
-    useEffect(() => {
-        console.log("The repArray is", repInfo);
-        console.log("Rep count is", repCount);
-
-    }, [repInfo])
+   
 
     return (
         <>
@@ -64,7 +60,7 @@ function GlassView() {
 
                 </div>
                 <button className='add-exercise' onClick={() => {
-                    //console.log("ref is",r)
+                    
                     if (!exerciseName) {
                         SetError("Enter something");
                     }
@@ -83,7 +79,7 @@ function GlassView() {
                         copy.push(to_push);
                         setRepInfo(copy);
                         setExerciseName('');
-                        glassRef.current.clearInput()
+                        glassRef.current.clearInput();
                     }
                 }}> Add</button>
 
@@ -94,7 +90,6 @@ function GlassView() {
                 id='exercise_name_input_field'
                 ref={glassRef}
                 type_of_label="text"
-                // value_of_input = {exerciseName}
                 onChange={(e) => {
                     setExerciseName(e.target.value);
                     SetError('');
@@ -144,39 +139,26 @@ function GlassView() {
                                                         repRef.current[idx].clearInput();
                                                         weightRef.current[idx].clearInput();
                                                     }
-                                                    
-
-                                                    // if (weightCount && repCount) {
-                                                    //     repAddr(idx, weightCount, repCount)
-                                                    //     setWeightCount(0);
-                                                    //     setRepCount(0);
-                                                    
-                                                    //     
-                                                    
-                                                    // }
+                                                  
                                                     else {
                                                         //setrepError("Enter weights or reps")
-                                                        copy_repInfo[idx].error = "Enter weights or reps";
+                                                        copy_repInfo[idx].error = "enter x or y";
                                                     }
                                                     setRepInfo(copy_repInfo);
                                                 }}
                                             >Add</button>
 
-                                            {/* < Ellipsis onClick={}/> */}
+                                            
                                             <div className="wrapper-ellipsis">
                                                 <span className="Elipsis-button"
                                                     onMouseOver={() => { showGlass(idx, true) }}>
-
-                                                    {/* onMouseOut={()=>{showGlass(idx,false)}}> */}
-
-
                                                     <b>. . .</b>
                                                 </span>
 
                                                 {repInfo[idx].ellipsis_status &&
                                                     <>
                                                         <div className='dropdown_content' onMouseOver={() => { showGlass(idx, true) }} onMouseOut={() => { showGlass(idx, false) }}>
-                                                            <p className='content' onClick={() => { workoutCancel(idx) }}>Cancel workout</p>
+                                                            <p className='content' onClick={() => { workoutCancel(idx) }}>Cancel</p>
                                                             <p className='content' onClick={() => { workoutRename(idx) }}>Rename</p>
                                                         </div>
                                                     </>
@@ -190,6 +172,7 @@ function GlassView() {
                                     <div className='weight_rep_inputs'>
                                         
                                         <InputArea 
+                                        style={{textAlign:'center'}}
                                         className = 'test'
                                         type_of_label = "number"
                                         labelname = "Enter r"
@@ -203,7 +186,7 @@ function GlassView() {
                                             copy_repInfo[idx].error = '';
                                             copy_repInfo[idx].rep_count = num;
                                             setRepInfo(copy_repInfo);
-                                            // setRepCount(e.target.value);}
+                                            
                                             }
 
                                             else{
@@ -220,6 +203,7 @@ function GlassView() {
                                         type_of_label="number"
                                         labelname = "Enter w"
                                         min = "0"
+                                        style={{textAlign:'center'}}
                                         // input_mode = "numeric"
                                         ref = {(e)=>{weightRef.current[idx] = e}}
                                         onChange={
@@ -230,7 +214,7 @@ function GlassView() {
                                                 copy_repInfo[idx].error = '';
                                                 copy_repInfo[idx].weight_count = num;
                                                 setRepInfo(copy_repInfo);
-                                                // setWeightCount(e.target.value);
+                                                
                                                 }
                                                 else{
                                                     copy_repInfo[idx].error = 'negative w entered';
