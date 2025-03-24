@@ -11,8 +11,8 @@ function GlassView() {
     const [repCount, setRepCount] = useState(0)
     const [weightCount, setWeightCount] = useState(0)
     const [Error, SetError] = useState('')
-    const repRef = useRef()
-    const weightRef = useRef()
+    const repRef = useRef([])
+    const weightRef = useRef([])
 
     function workoutCancel(selectedIdx) {
         setRepInfo((prev) => {
@@ -64,6 +64,7 @@ function GlassView() {
 
                 </div>
                 <button className='add-exercise' onClick={() => {
+                    //console.log("ref is",r)
                     if (!exerciseName) {
                         SetError("Enter something");
                     }
@@ -75,6 +76,8 @@ function GlassView() {
                             'error': '',
                             'ellipsis_status': false,
                             'edit_mode': false,
+                            'rep_count': 0,
+                            'weight_count':0,
                         };
 
                         copy.push(to_push);
@@ -110,6 +113,7 @@ function GlassView() {
                                                 value={exercisename.exercise_name}
                                                 onChange={(e) => {
                                                     let copy = [...repInfo];
+
                                                     copy[idx].exercise_name = e.target.value;
                                                     setRepInfo(copy);
 
@@ -132,16 +136,24 @@ function GlassView() {
                                                 onClick={() => {
                                                     let copy_repInfo = [...repInfo];
                                                     copy_repInfo[idx].error = '';
-
-
-                                                    if (weightCount && repCount) {
-                                                        repAddr(idx, weightCount, repCount)
-                                                        setWeightCount(0);
-                                                        setRepCount(0);
-                                                        repRef.current.clearInput();
-                                                        weightRef.current.clearInput();
                                                     
+                                                    if(copy_repInfo[idx].rep_count && copy_repInfo[idx].weight_count){
+                                                        repAddr(idx,copy_repInfo[idx].rep_count,copy_repInfo[idx].weight_count)
+                                                        copy_repInfo[idx].rep_count = 0;
+                                                        copy_repInfo[idx].weight_count = 0;
+                                                        repRef.current[idx].clearInput();
+                                                        weightRef.current[idx].clearInput();
                                                     }
+                                                    
+
+                                                    // if (weightCount && repCount) {
+                                                    //     repAddr(idx, weightCount, repCount)
+                                                    //     setWeightCount(0);
+                                                    //     setRepCount(0);
+                                                    
+                                                    //     
+                                                    
+                                                    // }
                                                     else {
                                                         //setrepError("Enter weights or reps")
                                                         copy_repInfo[idx].error = "Enter weights or reps";
@@ -182,15 +194,17 @@ function GlassView() {
                                         type_of_label = "number"
                                         labelname = "Enter r"
                                         min = {0}
-                                        ref = {repRef}
+                                        ref = {(e)=>{repRef.current[idx]= e}}
                                         onChange={(e) => {
                                             let copy_repInfo = [...repInfo]
                                             let num = e.target.value;
                                             if(num >= 0){
                                             
                                             copy_repInfo[idx].error = '';
+                                            copy_repInfo[idx].rep_count = num;
                                             setRepInfo(copy_repInfo);
-                                            setRepCount(e.target.value);}
+                                            // setRepCount(e.target.value);}
+                                            }
 
                                             else{
                                                 copy_repInfo[idx].error = 'negative r entered';
@@ -206,16 +220,17 @@ function GlassView() {
                                         type_of_label="number"
                                         labelname = "Enter w"
                                         min = "0"
-                                        input_mode = "numeric"
-                                        ref = {weightRef}
+                                        // input_mode = "numeric"
+                                        ref = {(e)=>{weightRef.current[idx] = e}}
                                         onChange={
                                             (e) => {
                                                 let num = e.target.value;
                                                 let copy_repInfo = [...repInfo]
                                                 if(num >= 0){
                                                 copy_repInfo[idx].error = '';
+                                                copy_repInfo[idx].weight_count = num;
                                                 setRepInfo(copy_repInfo);
-                                                setWeightCount(e.target.value);
+                                                // setWeightCount(e.target.value);
                                                 }
                                                 else{
                                                     copy_repInfo[idx].error = 'negative w entered';

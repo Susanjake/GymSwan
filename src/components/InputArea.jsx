@@ -34,7 +34,7 @@ function InputArea({ref,...props}) {
             id="input"
             ref={inputRef}
             min={props.min}
-            inputmode = {props.input_mode}
+            // inputmode = {props.input_mode}
 
             onChange={(e) => {
                 if (props.type_of_label === "email") {
