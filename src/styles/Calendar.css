@@ -1,9 +1,10 @@
 .insideCalendar{
-    
-    height:50px;
-    color:brown;
+    background-color: #424549;
+    height:80px;
+    color:#007BFF;
     border-style:solid;
     border-width:0;
+    border-radius: 10px;
     border-color: aliceblue;
     overflow:hidden;
     display: flex;

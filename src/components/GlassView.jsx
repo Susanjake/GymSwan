@@ -12,7 +12,7 @@ function GlassView() {
     const [repInfo, setRepInfo] = useState([])
     const [exerciseName, setExerciseName] = useState('')
     const [Error, SetError] = useState('')
-   
+
 
     function workoutCancel(selectedIdx) {
         setRepInfo((prev) => {
@@ -40,7 +40,7 @@ function GlassView() {
     }
 
     function repAddr(idx, weightInfo, repCount) {
-        
+
         let copy = [...repInfo];
         copy[idx].rep_details.push({
             'number_of_reps': repCount,
@@ -49,18 +49,30 @@ function GlassView() {
         setRepInfo(copy);
     }
 
-   
+
 
     return (
         <>
             <div className='entry-container'>
-                <div className='form'>
-                    <div className='form-group'>
-                    </div>
+                <div>
+                <InputArea
+                    labelname='Enter name'
+                    id='exercise_name_input_field'
+                    ref={glassRef}
+                    type_of_label="text"
+                    onChange={(e) => {
+                        setExerciseName(e.target.value);
+                        SetError('');
+                    }}
+                />
+                
+                </div>
 
+                <div>
+                <h3>{Error}</h3>
                 </div>
                 <button className='add-exercise' onClick={() => {
-                    
+
                     if (!exerciseName) {
                         SetError("Enter something");
                     }
@@ -73,7 +85,7 @@ function GlassView() {
                             'ellipsis_status': false,
                             'edit_mode': false,
                             'rep_count': 0,
-                            'weight_count':0,
+                            'weight_count': 0,
                         };
 
                         copy.push(to_push);
@@ -83,19 +95,11 @@ function GlassView() {
                     }
                 }}> Add</button>
 
+               
+
             </div>
 
-            <InputArea
-                labelname='Enter name'
-                id='exercise_name_input_field'
-                ref={glassRef}
-                type_of_label="text"
-                onChange={(e) => {
-                    setExerciseName(e.target.value);
-                    SetError('');
-                }}
-            />
-            <h3>{Error}</h3>
+
             <div style={{ padding: '10px' }}>
                 {
                     repInfo.map((exercisename, idx) => {
@@ -131,15 +135,15 @@ function GlassView() {
                                                 onClick={() => {
                                                     let copy_repInfo = [...repInfo];
                                                     copy_repInfo[idx].error = '';
-                                                    
-                                                    if(copy_repInfo[idx].rep_count && copy_repInfo[idx].weight_count){
-                                                        repAddr(idx,copy_repInfo[idx].rep_count,copy_repInfo[idx].weight_count)
+
+                                                    if (copy_repInfo[idx].rep_count && copy_repInfo[idx].weight_count) {
+                                                        repAddr(idx, copy_repInfo[idx].rep_count, copy_repInfo[idx].weight_count)
                                                         copy_repInfo[idx].rep_count = 0;
                                                         copy_repInfo[idx].weight_count = 0;
                                                         repRef.current[idx].clearInput();
                                                         weightRef.current[idx].clearInput();
                                                     }
-                                                  
+
                                                     else {
                                                         //setrepError("Enter weights or reps")
                                                         copy_repInfo[idx].error = "enter x or y";
@@ -148,7 +152,7 @@ function GlassView() {
                                                 }}
                                             >Add</button>
 
-                                            
+
                                             <div className="wrapper-ellipsis">
                                                 <span className="Elipsis-button"
                                                     onMouseOver={() => { showGlass(idx, true) }}>
@@ -170,59 +174,59 @@ function GlassView() {
                                     </div>
                                     <h3>{repInfo[idx].error}</h3>
                                     <div className='weight_rep_inputs'>
-                                        
-                                        <InputArea 
-                                        style={{textAlign:'center'}}
-                                        className = 'test'
-                                        type_of_label = "number"
-                                        labelname = "Enter r"
-                                        min = {0}
-                                        ref = {(e)=>{repRef.current[idx]= e}}
-                                        onChange={(e) => {
-                                            let copy_repInfo = [...repInfo]
-                                            let num = e.target.value;
-                                            if(num >= 0){
-                                            
-                                            copy_repInfo[idx].error = '';
-                                            copy_repInfo[idx].rep_count = num;
-                                            setRepInfo(copy_repInfo);
-                                            
-                                            }
 
-                                            else{
-                                                copy_repInfo[idx].error = 'negative r entered';
-                                                setRepInfo(copy_repInfo)
-
-                                            }
-
-                                        }}
-                                        />
-                                        
-
-                                        <InputArea 
-                                        type_of_label="number"
-                                        labelname = "Enter w"
-                                        min = "0"
-                                        style={{textAlign:'center'}}
-                                        // input_mode = "numeric"
-                                        ref = {(e)=>{weightRef.current[idx] = e}}
-                                        onChange={
-                                            (e) => {
-                                                let num = e.target.value;
+                                        <InputArea
+                                            style={{ textAlign: 'center' }}
+                                            className='test'
+                                            type_of_label="number"
+                                            labelname="Enter r"
+                                            min={0}
+                                            ref={(e) => { repRef.current[idx] = e }}
+                                            onChange={(e) => {
                                                 let copy_repInfo = [...repInfo]
-                                                if(num >= 0){
-                                                copy_repInfo[idx].error = '';
-                                                copy_repInfo[idx].weight_count = num;
-                                                setRepInfo(copy_repInfo);
-                                                
-                                                }
-                                                else{
-                                                    copy_repInfo[idx].error = 'negative w entered';
+                                                let num = e.target.value;
+                                                if (num >= 0) {
+
+                                                    copy_repInfo[idx].error = '';
+                                                    copy_repInfo[idx].rep_count = num;
                                                     setRepInfo(copy_repInfo);
+
                                                 }
-                                                                                                                                          
+
+                                                else {
+                                                    copy_repInfo[idx].error = 'negative r entered';
+                                                    setRepInfo(copy_repInfo)
+
+                                                }
+
+                                            }}
+                                        />
+
+
+                                        <InputArea
+                                            type_of_label="number"
+                                            labelname="Enter w"
+                                            min="0"
+                                            style={{ textAlign: 'center' }}
+                                            // input_mode = "numeric"
+                                            ref={(e) => { weightRef.current[idx] = e }}
+                                            onChange={
+                                                (e) => {
+                                                    let num = e.target.value;
+                                                    let copy_repInfo = [...repInfo]
+                                                    if (num >= 0) {
+                                                        copy_repInfo[idx].error = '';
+                                                        copy_repInfo[idx].weight_count = num;
+                                                        setRepInfo(copy_repInfo);
+
+                                                    }
+                                                    else {
+                                                        copy_repInfo[idx].error = 'negative w entered';
+                                                        setRepInfo(copy_repInfo);
+                                                    }
+
+                                                }
                                             }
-                                        }
                                         />
                                     </div>
 

@@ -4,19 +4,19 @@ import dayjs from 'dayjs'
 
 function Calendar2({ props }) {
   const [initialArr, setInitialArr] = useState([])
-  const [selectedDate, setSelectedDate] = useState()
+  const [selectedDate, setSelectedDate] = useState(dayjs())
+  const dayArr = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
   let arrayofRef = useRef([])
   let previousIndex = useRef(-1);
 
-
   function createInitialArr(date = dayjs()) {
     let arr = []
-    for (let i = 3; i > 0; i--) {
+    for (let i = 4; i > 0; i--) {
       arr.push(date.subtract(i, 'day'));
     }
     arr.push(date)
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 5; i++) {
       arr.push(date.add(i, 'day'));
     }
     return arr
@@ -30,8 +30,8 @@ function Calendar2({ props }) {
   function Manipulator(index) {
     let copy = [...initialArr];
     let offset = index - Math.floor(initialArr.length / 2);
-    console.log("The middle of the array is", Math.floor(initialArr.length / 2));
-    console.log("Offset is", offset)
+    // console.log("The middle of the array is", Math.floor(initialArr.length / 2));
+    // console.log("Offset is", offset)
 
     let zeroethIndex = copy[0]
     let lastIndex = copy[copy.length - 1]
@@ -42,11 +42,10 @@ function Calendar2({ props }) {
 
       }
       
-      if (copy.length > 10) {
-        //copy.splice(initialArr.length, 3);
-        //arrayofRef.current.splice(arrayofRef.current.length,2);
-        console.log("Initial splicing performed..", arrayofRef.current)
-      }
+      // if (copy.length > 10) {
+        
+      //   console.log("Initial splicing performed..", arrayofRef.current)
+      // }
 
     }
 
@@ -54,7 +53,7 @@ function Calendar2({ props }) {
       for (let j = 1; j <= Math.abs(offset); j++) {
         copy.push(lastIndex.add(j, 'day'));
       }
-      console.log("hey",copy.length)
+      // console.log("hey",copy.length)
       if (copy.length > 10) {
         //copy.splice(0, Math.floor(copy.length/5));
         //arrayofRef.current.splice(0,3);
@@ -72,7 +71,7 @@ function Calendar2({ props }) {
 
       // console.log("selected idx is ", selectedIndex);
       // console.log("Selected Date is",selectedDate);
-      console.log(initialArr)
+      // console.log(initialArr)
 
       let requiredIndex = initialArr.indexOf(selectedDate);
       console.log("previous", previousIndex.current)
@@ -99,17 +98,21 @@ function Calendar2({ props }) {
   }, [initialArr])
 
   return (
-    <div style={{ display: 'flex', maxWidth: props?.width ? props?.width : "800px", gap: '20px', overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', maxWidth:"100%", gap: '20px', overflowX: 'hidden' }}>
       {
         initialArr.map((x, idx) => (
+          
           <div className='insideCalendar'
-            style={{ backgroundColor: initialArr[idx] == selectedDate ? '#ffffff' : '#000000', minWidth: `${props?.width ? (props?.width - 40) / 6 : (800 - 40) / 6}px` }}
+            style={{ backgroundColor: initialArr[idx].date() == selectedDate.date() ? '#ffffff' : '#424549', minWidth: `${(800 - 40) / 6}px` }}
             key={idx}
             ref={(e) => { arrayofRef.current[idx] = e }}
             onClick={() => {
               Manipulator(idx)
             }}>
             {x.date()}
+            <br />
+            {dayArr[x.day()].slice(0,3)}
+            
           </div>
         ))}
     </div>

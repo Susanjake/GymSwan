@@ -1,9 +1,12 @@
 .entry-container{
-    width:70vw;
+    padding:20px;
+    /* width:80%; */
     height:10vh;
     display:flex;
+    padding-top:50px;
     flex-direction: row;
     justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .add-exercise{
@@ -18,13 +21,12 @@
 .ExerciseNameDiv{
     display: flexbox;
     justify-content: space-around;
-    /* justify-content:flex-end; */
-    width:70vw;
     background-color: #313335;
     height:auto;
     border:2px solid white;
     border-radius: 15px;
     padding: 50px;
+    margin: 2rem;
 }
 
 .button-exercise{
