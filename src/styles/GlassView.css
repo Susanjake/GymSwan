@@ -1,17 +1,25 @@
 .entry-container{
-    padding:20px;
+    /* padding:20px; */
     /* width:80%; */
+    width: 100%;
     height:10vh;
     display:flex;
-    padding-top:50px;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;;
     flex-direction: row;
     justify-content: space-between;
     /* justify-content: space-between; */
 }
 
+.add-excercise-button-container {
+    justify-items: center;
+    height: 2rem;
+}
 .add-exercise{
     width: 150px;
-    height:50px;
+    font-size: 0.7rem;
+    height: inherit;
 }
 
 .single-workout{
@@ -23,9 +31,12 @@
     justify-content: space-around;
     background-color: #313335;
     height:auto;
+    min-height: 20rem;
     border:2px solid white;
     border-radius: 15px;
-    padding: 50px;
+}
+
+.ExerciseNameDiv .box {
     margin: 2rem;
 }
 
@@ -44,6 +55,11 @@
     display: flex;
     gap:10px;
     
+}
+.xyz button {
+    justify-items: center;
+    height: 2rem;
+    font-size: 0.7rem;
 }
 
 .dropdown_content{
@@ -78,3 +94,10 @@
 /* .weight_rep_inputs .test{
     text-align: center;
 } */
+
+.error-container {
+    font-size: 0.5rem;
+    justify-items: center;
+    height: 2rem;
+    vertical-align: center;
+}

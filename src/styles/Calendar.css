@@ -1,6 +1,6 @@
 .insideCalendar{
     background-color: #424549;
-    height:80px;
+    height:100%;
     color:#007BFF;
     border-style:solid;
     border-width:0;
@@ -17,16 +17,4 @@
     animation-duration: 3s;
     animation-name: testSlide;
    
-}
-
-@keyframes insideCalendar-clicked{
-    
-    from{
-        margin-left: 0%;
-        width: 50%;
-    }
-    to{
-        margin-left: 100%;
-        width:100%;
-    }
 }

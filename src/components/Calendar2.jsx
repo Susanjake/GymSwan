@@ -98,12 +98,12 @@ function Calendar2({ props }) {
   }, [initialArr])
 
   return (
-    <div style={{ display: 'flex', maxWidth:"100%", gap: '20px', overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', overflowX: 'scroll',maxWidth:"100%",minWidth:"100%",gap:"0.2rem" }}>
       {
         initialArr.map((x, idx) => (
           
           <div className='insideCalendar'
-            style={{ backgroundColor: initialArr[idx].date() == selectedDate.date() ? '#ffffff' : '#424549', minWidth: `${(800 - 40) / 6}px` }}
+            style={{ backgroundColor: initialArr[idx].date() == selectedDate.date() ? '#ffffff' : '#424549', minWidth: '10.5%' }}
             key={idx}
             ref={(e) => { arrayofRef.current[idx] = e }}
             onClick={() => {

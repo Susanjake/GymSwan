@@ -15,7 +15,7 @@ function App() {
   const internalRef = useRef()
 
   return (
-    <>
+    <div style={{display:"flex",flexDirection:"column"}}>
       
       <Calendar2 />
       {/* <Test /> */}
@@ -23,7 +23,7 @@ function App() {
       <GlassView />
       {/* <Test2  ref={internalRef}/> */}
       {/* <UserData /> */}
-    </>
+    </div>
   )
 }
 
